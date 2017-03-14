@@ -16,8 +16,11 @@ public class GithubManager {
 		ReadTxt rt = new ReadTxt(gitUrlsPath);
 		links = rt.readFile();
 
-		cloneProjects();
-		getCommitsLog();
+		//cloneProjects();
+		//getCommitsLog();
+		/*
+		 * Run only after running all the commands of the console.
+		 */
 		checkoutProjects();
 
 	}
@@ -64,7 +67,7 @@ public class GithubManager {
 	public void checkoutProjects(){
 		for (String gitLink : links) {
 			if (gitLink.contains("git")) {
-				ReadTxt readLog = new ReadTxt(gitLink.substring(gitLink.lastIndexOf("/") + 1) + "/log.txt");
+				ReadTxt readLog = new ReadTxt("projects/" + gitLink.substring(gitLink.lastIndexOf("/") + 1) + "/log.txt");
 				List<String> log = readLog.readFile();
 				List<String> commits = collectCommits(log);
 				for (String commit : commits) {
