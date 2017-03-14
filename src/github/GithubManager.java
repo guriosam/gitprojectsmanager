@@ -67,14 +67,22 @@ public class GithubManager {
 	public void checkoutProjects(){
 		for (String gitLink : links) {
 			if (gitLink.contains("git")) {
-				ReadTxt readLog = new ReadTxt("projects/" + gitLink.substring(gitLink.lastIndexOf("/") + 1) + "/log.txt");
+				String gitName = gitLink.substring(gitLink.lastIndexOf("/") + 1);
+				
+				ReadTxt readLog = new ReadTxt("projects/" 
+						+ gitName + "/log.txt");
 				List<String> log = readLog.readFile();
 				List<String> commits = collectCommits(log);
 				for (String commit : commits) {
-					System.out.println("git clone " + gitLink + " " + gitLink.substring(gitLink.lastIndexOf("/") + 1)
+					System.out.println("git clone " + gitLink + " " 
+							+ gitName + 
+								"_" + "projects" + "/" + gitName
 							+ "_" + commit);
-					System.out.println("cd " + gitLink.substring(gitLink.lastIndexOf("/") + 1) + "_" + commit);
+					System.out.println("cd " + gitName + 
+							"_" + "projects");
+					System.out.println("cd " + gitName + "_" + commit);
 					System.out.println("git checkout " + commit);
+					System.out.println("cd ..");
 					System.out.println("cd ..");
 				}
 			}
