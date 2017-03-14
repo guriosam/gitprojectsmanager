@@ -64,8 +64,7 @@ public class GithubManager {
 	public void checkoutProjects(){
 		for (String gitLink : links) {
 			if (gitLink.contains("git")) {
-				System.out.println("cd " + gitLink.substring(gitLink.lastIndexOf("/") + 1));
-				ReadTxt readLog = new ReadTxt("log.txt");
+				ReadTxt readLog = new ReadTxt(gitLink.substring(gitLink.lastIndexOf("/") + 1) + "/log.txt");
 				List<String> log = readLog.readFile();
 				List<String> commits = collectCommits(log);
 				for (String commit : commits) {
